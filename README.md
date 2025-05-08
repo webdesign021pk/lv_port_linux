@@ -14,6 +14,7 @@ https://blog.lvgl.io/2018-01-03/linux_fb
 Clone the project
 
 ```
+git clone https://github.com/webdesign021pk/lv_port_linux.git
 git clone https://github.com/lvgl/lv_port_linux.git
 cd lv_port_linux/
 ```
