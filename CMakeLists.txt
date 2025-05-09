@@ -32,18 +32,6 @@ if (LV_USE_EVDEV)
 endif()
 
 # Configuration
-if (LV_USE_LINUX_DRM)
-
-    message("Including DRM support")
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(LIBDRM REQUIRED libdrm)
-
-    list(APPEND PKG_CONFIG_LIB ${LIBDRM_LIBRARIES})
-    list(APPEND PKG_CONFIG_INC ${LIBDRM_INCLUDE_DIRS})
-    list(APPEND LV_LINUX_BACKEND_SRC src/lib/display_backends/drm.c)
-
-endif()
-
 if (LV_USE_SDL)
 
     message("Including SDL2 support")
@@ -57,62 +45,11 @@ if (LV_USE_SDL)
     list(APPEND LV_LINUX_BACKEND_SRC src/lib/display_backends/sdl.c)
 endif()
 
-
-if (LV_USE_WAYLAND)
-
-    message("Including Wayland support")
-
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(WAYLAND_CLIENT REQUIRED wayland-client)
-    pkg_check_modules(WAYLAND_CURSOR REQUIRED wayland-cursor)
-    pkg_check_modules(XKBCOMMON REQUIRED xkbcommon)
-
-    list(APPEND PKG_CONFIG_LIB ${WAYLAND_CLIENT_LIBRARIES})
-    list(APPEND PKG_CONFIG_LIB ${WAYLAND_CURSOR_LIBRARIES})
-    list(APPEND PKG_CONFIG_LIB ${XKBCOMMON_LIBRARIES})
-
-    # Wayland protocols
-    pkg_check_modules(WAYLAND_PROTOCOLS REQUIRED wayland-protocols>=1.25)
-    pkg_get_variable(WAYLAND_PROTOCOLS_BASE wayland-protocols pkgdatadir)
-
-    execute_process(COMMAND "scripts/gen_wl_protocols.sh" OUTPUT_VARIABLE WAYLAND_PROTOCOLS_SRC)
-
-    list(APPEND PKG_CONFIG_INC "${PROJECT_SOURCE_DIR}/wl_protocols")
-    list(APPEND LV_LINUX_BACKEND_SRC src/lib/display_backends/wayland.c wl_protocols/wayland_xdg_shell.c)
-
-endif()
-
-if (LV_USE_X11)
-
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(X11 REQUIRED x11)
-
-    message("Including X11 support")
-
-    list(APPEND PKG_CONFIG_INC ${X11_INCLUDE_DIRS})
-    list(APPEND PKG_CONFIG_LIB ${X11_LIBRARIES})
-    list(APPEND LV_LINUX_BACKEND_SRC src/lib/display_backends/x11.c)
-
-endif()
-
 if (LV_USE_LINUX_FBDEV)
 
     # FBDEV has no dependencies
     message("Including FBDEV support")
     list(APPEND LV_LINUX_BACKEND_SRC src/lib/display_backends/fbdev.c)
-
-endif()
-
-if (LV_USE_OPENGLES)
-
-    message("Including OPENGLES support")
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(GLFW3 REQUIRED glfw3)
-    pkg_check_modules(GLEW REQUIRED glew)
-
-    list(APPEND PKG_CONFIG_LIB ${GLFW3_LIBRARIES})
-    list(APPEND PKG_CONFIG_LIB ${GLEW_LIBRARIES})
-    list(APPEND LV_LINUX_BACKEND_SRC src/lib/display_backends/glfw3.c)
 
 endif()
 
@@ -130,8 +67,19 @@ target_include_directories(lvgl PUBLIC ${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DI
 add_library(lvgl_linux STATIC ${LV_LINUX_SRC} ${LV_LINUX_BACKEND_SRC})
 target_include_directories(lvgl_linux PRIVATE ${LV_LINUX_INC} ${PROJECT_SOURCE_DIR})
 
-add_executable(lvglsim src/main.c ${LV_LINUX_SRC} ${LV_LINUX_BACKEND_SRC})
-target_link_libraries(lvglsim lvgl_linux lvgl lvgl::examples lvgl::demos lvgl::thorvg m pthread ${PKG_CONFIG_LIB})
+# Add app and launcher source files
+set(APP_SOURCES
+    src/system/app_manager.c
+    src/launcher/launcher.c
+    src/apps/sms/sms.c
+    src/apps/notes/notes.c
+    src/apps/calculator/calculator.c
+)
+# add_executable(lvglsim src/main.c ${LV_LINUX_SRC} ${LV_LINUX_BACKEND_SRC})
+add_executable(lvglsim src/main.c ${LV_LINUX_SRC} ${LV_LINUX_BACKEND_SRC} ${APP_SOURCES})
+
+
+target_link_libraries(lvglsim lvgl_linux lvgl lvgl::thorvg m pthread ${PKG_CONFIG_LIB})
 
 # Install the lvgl_linux library and its headers
 install(DIRECTORY src/lib/
