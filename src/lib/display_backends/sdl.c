@@ -135,6 +135,19 @@ static void run_loop_sdl(void)
     while (true) {
         // 🔁 Handle all pending SDL events
         while (SDL_PollEvent(&event)) {
+            // 👇 Handle window resize
+            if (event.type == SDL_WINDOWEVENT &&
+                event.window.event == SDL_WINDOWEVENT_RESIZED) {
+
+                int new_w = event.window.data1;
+                int new_h = event.window.data2;
+
+                printf("🔁 Window resized to %dx%d\n", new_w, new_h);
+
+                // Update LVGL's internal resolution
+                lv_display_set_resolution(lv_display_get_default(), new_w, new_h);
+            }
+            
             // printf("SDL Event type: %d\n", event.type);
 
             if (event.type == SDL_KEYDOWN) {

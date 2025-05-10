@@ -1,0 +1,14 @@
+{
+    "name": "Classic Default",
+    "wallpaper": "wallpaper.png",
+    "icons": {
+        "sms": "icon_sms.png",
+        "calculator": "icon_calculator.png",
+        "notes": "icon_notes.png"
+    },
+    "colors": {
+        "bg": "#001F3F",
+        "btn": "#0074D9",
+        "text": "#FFFFFF"
+    }
+}

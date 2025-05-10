@@ -7,6 +7,7 @@ typedef void (*app_open_cb_t)(void);  // Define the function pointer type
 #include "../apps/sms/sms.h"
 #include "../apps/notes/notes.h"
 #include "../apps/calculator/calculator.h"
+#include "../system/theme_manager/theme_manager.h"
 
 void open_app_cb(lv_event_t * e)
 {
@@ -45,6 +46,13 @@ void launcher_open(void)
     lv_obj_t * lbl_calc = lv_label_create(btn_calc);
     lv_label_set_text(lbl_calc, "Calc");
     lv_obj_add_event_cb(btn_calc, open_app_cb, LV_EVENT_CLICKED, calculator_open);  // 👈 pass function pointer
+    
+    // Button: reload theme
+    lv_obj_t * btn_theme = lv_btn_create(scr);
+    lv_obj_align(btn_theme, LV_ALIGN_CENTER, 0, 100);
+    lv_obj_t * lbl_theme = lv_label_create(btn_theme);
+    lv_label_set_text(lbl_theme, "Reload Theme");
+    lv_obj_add_event_cb(btn_theme, open_app_cb, LV_EVENT_CLICKED, theme_manager_load);  // 👈 pass function pointer
 
     lv_scr_load(scr);
 }
