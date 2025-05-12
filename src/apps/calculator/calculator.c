@@ -1,6 +1,6 @@
 #include "calculator.h"
-#include "../launcher/launcher.h"  // or declare externally if needed
-#include "../../system/theme_manager/theme_manager.h"
+#include "launcher/launcher.h"  // or declare externally if needed
+#include "system/theme_manager/theme_manager.h"
 
 static lv_obj_t * app_screen = NULL;
 extern void launcher_open(void);  // 👈 declare this at the top if needed

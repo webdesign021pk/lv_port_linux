@@ -17,10 +17,11 @@ extern struct theme_data_t {
     lv_color_t bg_color;
     lv_color_t btn_color;
     lv_color_t text_color;
-    char icon_sms[64];
-    char icon_notes[64];
-    char icon_calculator[64];
     char wallpaper[64];
+    int icon_width;
+    int icon_height;
+    int icon_align_x;
+    int icon_align_y;
 } current_theme;
 
 #ifdef __cplusplus

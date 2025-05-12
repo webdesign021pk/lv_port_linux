@@ -77,17 +77,6 @@ void theme_manager_load(void)
     snprintf(current_theme.wallpaper, sizeof(current_theme.wallpaper), "A:/themes/default/%s",
              get_string_or_default(root, "wallpaper", "wallpaper.png"));
 
-    if(icons) {
-        snprintf(current_theme.icon_sms, sizeof(current_theme.icon_sms), "A:/themes/default/%s",
-                 get_string_or_default(icons, "sms", "icon_sms.png"));
-
-        snprintf(current_theme.icon_calculator, sizeof(current_theme.icon_calculator), "A:/themes/default/%s",
-                 get_string_or_default(icons, "calculator", "icon_calc.png"));
-
-        snprintf(current_theme.icon_notes, sizeof(current_theme.icon_notes), "A:/themes/default/%s",
-                 get_string_or_default(icons, "notes", "icon_notes.png"));
-    }
-
     if(colors) {
         current_theme.bg_color   = get_color_or_default(colors, "bg", "#1E1E1E");
         current_theme.btn_color  = get_color_or_default(colors, "btn", "#0074D9");
@@ -97,9 +86,9 @@ void theme_manager_load(void)
     // Debug output
     printf("Theme name: %s\n", current_theme.name);
     printf("Wallpaper: %s\n", current_theme.wallpaper);
-    printf("Icon SMS: %s\n", current_theme.icon_sms);
-    printf("Icon Calculator: %s\n", current_theme.icon_calculator);
-    printf("Icon Notes: %s\n", current_theme.icon_notes);
+    // printf("Icon SMS: %s\n", current_theme.icon_sms);
+    // printf("Icon Calculator: %s\n", current_theme.icon_calculator);
+    // printf("Icon Notes: %s\n", current_theme.icon_notes);
 
     cJSON_Delete(root);
     free(data);

@@ -27,6 +27,9 @@
 
 #include "lvgl/lvgl.h"
 
+#include "lib/lv_fs_if/lv_fs_if.h" 
+
+
 #include "src/lib/driver_backends.h"
 #include "src/lib/simulator_util.h"
 #include "src/lib/simulator_settings.h"
@@ -76,13 +79,18 @@ static void configure_simulator(int argc, char ** argv)
  * @param argc the count of arguments in argv
  * @param argv The arguments
  */
+
 int main(int argc, char ** argv)
 {
     configure_simulator(argc, argv);
 
     /* Initialize LVGL. */
     lv_init();
-    lv_fs_init();  // This is essential to register "A:/"
+    
+    /* Initialize file system drivers */
+    lv_fs_init();  // essential to register "A:/"
+    lv_fs_if_init();  // 🚨 This is missing in your `main.c`
+    lv_fs_posix_init(); // essential to register "A:/ to read file like app png icons"
 
     /* Initialize the configured backend */
     if(driver_backends_init_backend(selected_backend) == -1) {

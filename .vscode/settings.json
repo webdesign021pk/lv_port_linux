@@ -3,6 +3,12 @@
     "files.associations": {
         "stdio.h": "c",
         "theme_manager.h": "c",
-        "cjson.h": "c"
+        "cjson.h": "c",
+        "lvgl.h": "c",
+        "lv_demos.h": "c",
+        "lv_demo_music.h": "c",
+        "lv_demo_widgets.h": "c",
+        "app_manager.h": "c",
+        "lv_fs_if.h": "c"
     }
 }

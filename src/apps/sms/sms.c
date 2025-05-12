@@ -1,5 +1,6 @@
 #include "sms.h"
-#include "../launcher/launcher.h"  // or declare externally if needed
+// #include "../launcher/launcher.h"  // or declare externally if needed
+#include "launcher/launcher.h"
 
 static lv_obj_t * app_screen = NULL;
 extern void launcher_open(void);  // 👈 declare this at the top if needed

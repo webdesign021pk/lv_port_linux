@@ -1,0 +1,6 @@
+{
+  "name": "Calculator",
+  "icon": "icon_calculator.png",
+  "library": "libcalculator.so",
+  "exec_name": "calculator_open"
+}

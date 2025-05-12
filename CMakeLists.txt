@@ -70,14 +70,15 @@ target_include_directories(lvgl_linux PRIVATE ${LV_LINUX_INC} ${PROJECT_SOURCE_D
 set(SYSTEM_SRC
     src/system/theme_manager/theme_manager.c
     src/system/app_manager.c
+    src/lib/lv_fs_if/lv_fs_if.c # for the file driver system
 )
 
 set(APP_SOURCES
-    # src/system/app_manager.c
+    src/system/app_registry/app_registry.c
     src/launcher/launcher.c
-    src/apps/sms/sms.c
-    src/apps/notes/notes.c
-    src/apps/calculator/calculator.c
+    # src/apps/sms/sms.c
+    # src/apps/notes/notes.c
+    # src/apps/calculator/calculator.c
 )
 
 # add_executable(lvglsim src/main.c ${LV_LINUX_SRC} ${LV_LINUX_BACKEND_SRC})
@@ -89,6 +90,10 @@ add_executable(
     ${SYSTEM_SRC}
 )
 
+# 👇 Add this line after `add_executable`: for enabling dynamic access of global variables
+target_link_options(lvglsim PRIVATE -rdynamic)
+
+# adding cJSON
 find_path(CJSON_INCLUDE_DIR cJSON.h PATH_SUFFIXES cjson)
 find_library(CJSON_LIBRARY NAMES cjson)
 
@@ -99,7 +104,25 @@ endif()
 include_directories(${CJSON_INCLUDE_DIR})
 set(CJSON_LIBRARIES ${CJSON_LIBRARY})
 
-target_link_libraries(lvglsim lvgl_linux lvgl lvgl::thorvg m pthread ${PKG_CONFIG_LIB} ${CJSON_LIBRARIES})
+# adding libpng
+find_path(PNG_INCLUDE_DIR png.h
+          PATHS /usr/include /usr/local/include /opt/homebrew/include # Common locations
+          PATH_SUFFIXES libpng) # Sometimes it's in a subdirectory
+
+find_library(PNG_LIBRARY
+             NAMES png libpng libpng16 libpng12 # Common names
+             PATHS /usr/lib /usr/local/lib /opt/homebrew/lib # Common locations
+             )
+
+if(NOT PNG_INCLUDE_DIR OR NOT PNG_LIBRARY)
+    message(FATAL_ERROR "libpng library not found. Please install it.")
+endif()
+
+include_directories(${PNG_INCLUDE_DIR})
+
+set(PNG_LIBRARY ${PNG_LIBRARY}) # Optionally, explicitly set this variable
+
+target_link_libraries(lvglsim lvgl_linux lvgl lvgl::thorvg m pthread ${PKG_CONFIG_LIB} ${CJSON_LIBRARIES} ${PNG_LIBRARY})
 
 # Install the lvgl_linux library and its headers
 install(DIRECTORY src/lib/

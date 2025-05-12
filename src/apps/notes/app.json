@@ -1,0 +1,6 @@
+{
+  "name": "Notes",
+  "icon": "icon_notes.png",
+  "library": "libnotes.so",
+  "exec_name": "notes_open"
+}
