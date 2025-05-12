@@ -9,7 +9,7 @@ void calculator_open(void)
 {
     app_screen = lv_obj_create(NULL); // Create new screen
     // lv_obj_set_style_bg_color(app_screen, lv_palette_lighten(LV_PALETTE_BLUE, 2), 0);
-    lv_obj_set_style_bg_color(app_screen, current_theme.bg_color, 0);
+    lv_obj_set_style_bg_color(app_screen, current_theme.idle_screen_wallpaper_color, 0);
 
     // Title label
     lv_obj_t * title = lv_label_create(app_screen);

@@ -21,11 +21,9 @@
 					}
 				},
 				"wallpaper": {
-					"image": {
-						"source": "wallpaper_background_240x320.jpg",
-						"color": "0x000000",
-						"transparency": "0.1"
-					}
+					"source": "wallpaper_background_240x320.jpg",
+					"color": "0x000000",
+					"transparency": "0.1"
 				}
 			},
 			"menu-app": {
@@ -48,11 +46,9 @@
 					}
 				},
 				"wallpaper": {
-					"image": {
-						"source": "wallpaper_background_240x320.jpg",
-						"color": "0x000000",
-						"transparency": "0.1"
-					}
+					"source": "wallpaper_background_240x320.jpg",
+					"color": "0x000000",
+					"transparency": "0.1"
 				},
 				"menu": {
 					"grid-menu": {
@@ -70,11 +66,9 @@
 								"size": 12
 							},
 							"background": {
-								"image": {
-									"source": "wallpaper_background_240x320.jpg",
-									"color": "0x000000",
-									"transparency": "0.1"
-								}
+								"source": "wallpaper_background_240x320.jpg",
+								"color": "0x000000",
+								"transparency": "0.1"
 							}
 						},
 						"icon-size": {
