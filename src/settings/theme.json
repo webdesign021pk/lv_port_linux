@@ -61,7 +61,7 @@
 						},
 						"selected": {
 							"font": {
-								"color": "0xcccccc",
+								"color": "#FFFF00",
 								"outline": "0x000000",
 								"size": 12
 							},
@@ -72,8 +72,8 @@
 							}
 						},
 						"icon-size": {
-							"width": 74,
-							"height": 79
+							"width": 40,
+							"height": 40
 						}
 					}
 				}

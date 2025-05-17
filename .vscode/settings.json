@@ -9,6 +9,7 @@
         "lv_demo_music.h": "c",
         "lv_demo_widgets.h": "c",
         "app_manager.h": "c",
-        "lv_fs_if.h": "c"
+        "lv_fs_if.h": "c",
+        "lv_draw_image.h": "c"
     }
 }
