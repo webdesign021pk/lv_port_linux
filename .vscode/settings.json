@@ -14,6 +14,7 @@
         "app_registry.h": "c",
         "launcher.h": "c",
         "stdlib.h": "c",
-        "calculator.h": "c"
+        "calculator.h": "c",
+        "home_screen.h": "c"
     }
 }

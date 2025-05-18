@@ -80,6 +80,22 @@ set(APP_SOURCES
     src/system/ui/app_window.c
 )
 
+set(FONT_SOURCES
+    lvgl/src/font/lv_font_montserrat_8.c
+    lvgl/src/font/lv_font_montserrat_10.c
+    lvgl/src/font/lv_font_montserrat_12.c
+    lvgl/src/font/lv_font_montserrat_14.c
+    lvgl/src/font/lv_font_montserrat_16.c
+    lvgl/src/font/lv_font_montserrat_18.c
+    lvgl/src/font/lv_font_montserrat_20.c
+    lvgl/src/font/lv_font_montserrat_22.c
+    lvgl/src/font/lv_font_montserrat_24.c
+    lvgl/src/font/lv_font_montserrat_26.c
+    lvgl/src/font/lv_font_montserrat_28.c
+    lvgl/src/font/lv_font_montserrat_30.c
+    lvgl/src/font/lv_font_montserrat_32.c
+)
+
 # add_executable(lvglsim src/main.c ${LV_LINUX_SRC} ${LV_LINUX_BACKEND_SRC})
 add_executable(
     lvglsim src/main.c
@@ -87,6 +103,7 @@ add_executable(
     ${LV_LINUX_BACKEND_SRC}
     ${APP_SOURCES}
     ${SYSTEM_SRC}
+    ${FONT_SOURCES}
 )
 
 # 👇 Add this line after `add_executable`: for enabling dynamic access of global variables
