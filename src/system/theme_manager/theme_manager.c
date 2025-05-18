@@ -16,10 +16,19 @@ struct theme_data_t current_theme;
 
 static lv_color_t parse_hex_color(const char *hex)
 {
-    if (!hex || strlen(hex) < 6) return lv_color_black();
+    if (!hex || strlen(hex) < 6) {
+        return lv_color_black();
+    }
+
+    // Skip prefix: support #RRGGBB or 0xRRGGBB
+    const char *start = hex;
+    if (strncmp(hex, "0x", 2) == 0 || strncmp(hex, "#", 1) == 0) {
+        start = hex + (hex[0] == '#' ? 1 : 2);
+    }
 
     unsigned int r, g, b;
-    sscanf(hex + 2, "%02x%02x%02x", &r, &g, &b); // skip "0x"
+    sscanf(start, "%02x%02x%02x", &r, &g, &b);
+
     return lv_color_make(r, g, b);
 }
 
@@ -87,7 +96,7 @@ void theme_manager_load(void)
 
     current_theme.idle_screen_wallpaper_color = parse_hex_color(cJSON_GetObjectItem(wp1, "color")->valuestring);
     snprintf(current_theme.idle_screen_wallpaper_source, sizeof(current_theme.idle_screen_wallpaper_source), "A:/themes/default/%s", cJSON_GetObjectItem(wp1, "source")->valuestring);
-    current_theme.idle_screen_wallpaper_transparency = (short int)parse_alpha(cJSON_GetObjectItem(wp1, "transparency")->valuestring);
+    current_theme.idle_screen_wallpaper_opacity = (short int)parse_alpha(cJSON_GetObjectItem(wp1, "opacity")->valuestring);
 
     // --- MENU APP ---
     cJSON * menu_app = cJSON_GetObjectItem(screens, "menu-app");
@@ -119,7 +128,7 @@ void theme_manager_load(void)
 
     current_theme.menu_app_wallpaper_color = parse_hex_color(cJSON_GetObjectItem(wp2, "color")->valuestring);
     snprintf(current_theme.menu_app_wallpaper_source, sizeof(current_theme.menu_app_wallpaper_source), "A:/themes/default/%s", cJSON_GetObjectItem(wp2, "source")->valuestring);
-    current_theme.menu_app_wallpaper_transparency = (short int)parse_alpha(cJSON_GetObjectItem(wp2, "transparency")->valuestring);
+    current_theme.menu_app_wallpaper_opacity = (short int)parse_alpha(cJSON_GetObjectItem(wp2, "opacity")->valuestring);
 
     // grid menu
     cJSON * gf1 = cJSON_GetObjectItem(grid_uns, "font");
@@ -136,7 +145,7 @@ void theme_manager_load(void)
 
     current_theme.menu_app_grid_menu_selected_bg_color = parse_hex_color(cJSON_GetObjectItem(gbg, "color")->valuestring);
     snprintf(current_theme.menu_app_grid_menu_selected_bg_source, sizeof(current_theme.menu_app_grid_menu_selected_bg_source), "A:/themes/default/%s", cJSON_GetObjectItem(gbg, "source")->valuestring);
-    current_theme.menu_app_grid_menu_selected_transparency = (short int)parse_alpha(cJSON_GetObjectItem(gbg, "transparency")->valuestring);
+    current_theme.menu_app_grid_menu_selected_opacity = (short int)parse_alpha(cJSON_GetObjectItem(gbg, "opacity")->valuestring);
 
     // icon size
     current_theme.menu_app_grid_menu_icon_width = cJSON_GetObjectItem(grid_icon, "width")->valueint;

@@ -1,6 +1,0 @@
-{
-  "name": "SMS2",
-  "icon": "icon_sms.png",
-  "library": "libsms2.so",
-  "exec_name": "sms_open"
-}

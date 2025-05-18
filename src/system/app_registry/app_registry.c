@@ -1,4 +1,6 @@
 #include "app_registry.h"
+#include "../system/app_manager.h"  // To use AppOpenFunc
+
 #include <cjson/cJSON.h>
 
 #include <dirent.h>
@@ -16,7 +18,9 @@ AppInfo app_registry[MAX_APPS];
 int app_count = 0;
 
 // Define a standard type for the application entry point function
-typedef void (*app_entry_point_t)(void);
+// typedef void (*app_entry_point_t)(void);
+typedef void (*app_entry_point_t)(lv_obj_t ** out_screen);  // ✅
+
 
 void build_app_registry(const char* apps_base_path) {
     app_count = 0;
@@ -66,7 +70,8 @@ void build_app_registry(const char* apps_base_path) {
                     // Look up the entry point function within the loaded library
                     app_entry_point_t app_exec_fn = (app_entry_point_t)dlsym(library_handle, exec_name_json->valuestring);
                     if (app_exec_fn) {
-                        app->exec_fn = (void (*)(void))app_exec_fn; // Cast to your generic function pointer type
+                        // app->exec_fn = (void (*)(void))app_exec_fn; // Cast to your generic function pointer type
+                        app->exec_fn = (AppOpenFunc)app_exec_fn;
                         app->library_handle = library_handle; // Store the handle for later unloading if needed
                         app_count++;
                     } else {

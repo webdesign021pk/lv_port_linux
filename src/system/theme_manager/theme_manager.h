@@ -31,7 +31,7 @@ extern struct theme_data_t {
     // idle screen wallpaper
     char idle_screen_wallpaper_source[128];
     lv_color_t idle_screen_wallpaper_color;
-    uint8_t idle_screen_wallpaper_transparency;  // 0-255
+    uint8_t idle_screen_wallpaper_opacity;  // 0-255
 
     // menu app status area
     lv_color_t menu_app_status_area_font_color;
@@ -48,7 +48,7 @@ extern struct theme_data_t {
     // menu app wallpaper
     char menu_app_wallpaper_source[128];
     lv_color_t menu_app_wallpaper_color;
-    uint8_t menu_app_wallpaper_transparency;  // 0-255
+    uint8_t menu_app_wallpaper_opacity;  // 0-255
 
     // menu app grid menu unselected
     lv_color_t menu_app_grid_menu_unselected_font_color;
@@ -61,7 +61,7 @@ extern struct theme_data_t {
     uint8_t menu_app_grid_menu_selected_font_size;
     lv_color_t menu_app_grid_menu_selected_bg_color;
     char menu_app_grid_menu_selected_bg_source[128];
-    uint8_t menu_app_grid_menu_selected_transparency;  // 0-255
+    uint8_t menu_app_grid_menu_selected_opacity;  // 0-255
     
     // menu app grid menu icon 
     uint8_t menu_app_grid_menu_icon_width;

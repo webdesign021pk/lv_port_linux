@@ -42,6 +42,8 @@
 // #include "launcher/launcher.h"
 #include "system/app_manager.h"
 #include "system/theme_manager/theme_manager.h"
+#include "system/screens/idle/home_screen/home_screen.h"
+
 
 /* Internal functions */
 static void configure_simulator(int argc, char ** argv);
@@ -110,7 +112,9 @@ int main(int argc, char ** argv)
     //loading the theme
     theme_manager_load();
 
-    app_manager_start();  // Start the system (loads launcher)
+    lv_scr_load(home_screen_create());
+
+    // app_manager_start();  // Start the system (loads launcher)
 
     // driver loop
     driver_backends_run_loop();

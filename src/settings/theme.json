@@ -23,7 +23,7 @@
 				"wallpaper": {
 					"source": "wallpaper_background_240x320.jpg",
 					"color": "0x000000",
-					"transparency": "0.1"
+					"opacity": "0.1"
 				}
 			},
 			"menu-app": {
@@ -47,8 +47,8 @@
 				},
 				"wallpaper": {
 					"source": "wallpaper_background_240x320.jpg",
-					"color": "0x000000",
-					"transparency": "0.1"
+					"color": "#333333",
+					"opacity": "0.5"
 				},
 				"menu": {
 					"grid-menu": {
@@ -62,13 +62,13 @@
 						"selected": {
 							"font": {
 								"color": "#FFFF00",
-								"outline": "0x000000",
+								"outline": "#000000",
 								"size": 12
 							},
 							"background": {
 								"source": "wallpaper_background_240x320.jpg",
-								"color": "0x000000",
-								"transparency": "0.1"
+								"color": "#787878",
+								"opacity": "0.1"
 							}
 						},
 						"icon-size": {

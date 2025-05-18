@@ -75,10 +75,9 @@ set(SYSTEM_SRC
 
 set(APP_SOURCES
     src/system/app_registry/app_registry.c
-    src/launcher/launcher.c
-    # src/apps/sms/sms.c
-    # src/apps/notes/notes.c
-    # src/apps/calculator/calculator.c
+    src/system/screens/app_menu/launcher/launcher.c
+    src/system/screens/idle/home_screen/home_screen.c
+    src/system/ui/app_window.c
 )
 
 # add_executable(lvglsim src/main.c ${LV_LINUX_SRC} ${LV_LINUX_BACKEND_SRC})
