@@ -15,6 +15,9 @@
         "launcher.h": "c",
         "stdlib.h": "c",
         "calculator.h": "c",
-        "home_screen.h": "c"
+        "home_screen.h": "c",
+        "*.backup": "c",
+        "string.h": "c",
+        "errno.h": "c"
     }
 }
